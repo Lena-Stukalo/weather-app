@@ -1,12 +1,12 @@
-import AddForm from "./components/addForm/AddForm";
-import Modal from "./components/modal/Modal";
+import AsideBar from "./components/aside/AsideBar";
+import LayOut from "./components/layOut/LayOut";
+import css from "./App.module.css";
 
 function App() {
   return (
-    <div>
-      <Modal>
-        <AddForm />
-      </Modal>
+    <div className={css.App}>
+      <LayOut />
+      <AsideBar />
     </div>
   );
 }

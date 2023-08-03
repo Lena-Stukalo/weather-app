@@ -1,0 +1,21 @@
+.input{
+    border: none;
+    background-color: transparent;
+    width: 90%;
+    font-size: 17px;
+}
+.form {
+    background-color: #f2f4f8;
+    width: 300px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+.label{
+    color: black;
+    margin-right: 10px;
+}
+.svg{
+    width: 20px;
+}
