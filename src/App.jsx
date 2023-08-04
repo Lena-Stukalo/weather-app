@@ -12,7 +12,7 @@ function App() {
         name: "Kyiv",
         src: "https://files.fm/thumb_show.php?i=tx2hzmyz5",
       },
-      start_date: "2023-08-04",
+      start_date: "2023-08-05",
       end_date: "2023-08-07",
     },
   ]);
@@ -29,7 +29,7 @@ function App() {
             trips={trips}
           />
         )}
-        {trip && <AsideBar city={trip.city} />}
+        {trip && <AsideBar trip={trip} />}
       </div>
     );
   }
