@@ -62,6 +62,10 @@
 width: 80%;
 
 }
+.dataPicker{
+border: none;
+    
+    }
 
 .title{
     border-bottom: solid lightgrey 1px;

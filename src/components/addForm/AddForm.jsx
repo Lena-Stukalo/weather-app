@@ -1,13 +1,24 @@
+import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.module.css";
+import date from "../../mock/citys.json";
 import css from "./AddForm.module.css";
 import Button from "../utils/button/Button";
-import { useState } from "react";
 
-const AddForm = ({ operation, closeModal, params }) => {
+const AddForm = ({ operation, closeModal }) => {
   const [formData, setFormData] = useState({
-    city: "",
+    city: { name: "", src: "" },
     start_date: "",
     end_date: "",
   });
+  const formatDate = (date) => {
+    const formatdate = [
+      date.getFullYear(),
+      "0" + (date.getMonth() + 1),
+      date.getDate(),
+    ].join("-");
+    return formatdate;
+  };
   const onSubmitForm = (event) => {
     event.preventDefault();
     operation(new FormData(event.target));
@@ -15,9 +26,24 @@ const AddForm = ({ operation, closeModal, params }) => {
   };
   const onInputChange = (event) => {
     const { name } = event.target;
+    console.log(event.target.value);
     setFormData((prevState) => ({
       ...prevState,
-      [name]: event.target.value,
+      [name]: JSON.parse(event.target.value),
+    }));
+    console.log(formData);
+  };
+  const onStartDateInputCange = (date) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      start_date: date,
+    }));
+  };
+  const onEndDateInputCange = (date) => {
+    console.log(formData);
+    setFormData((prevState) => ({
+      ...prevState,
+      end_date: date,
     }));
   };
 
@@ -30,43 +56,75 @@ const AddForm = ({ operation, closeModal, params }) => {
             <span className={css.span}>*</span> City
           </label>
           <div className={css.modalWrapper}>
-            <input
+            <select
               type="text"
-              value={formData.nickname}
               className={css.modalInput}
               name="city"
               id="city"
               required
               onChange={onInputChange}
-            ></input>
+            >
+              <option value={JSON.stringify(date.city[0])}>
+                {date.city[0].name}
+              </option>
+              <option value={JSON.stringify(date.city[1])}>
+                {date.city[1].name}
+              </option>
+              <option value={JSON.stringify(date.city[2])}>
+                {date.city[2].name}
+              </option>
+              <option value={JSON.stringify(date.city[3])}>
+                {date.city[3].name}
+              </option>
+              <option value={JSON.stringify(date.city[4])}>
+                {date.city[4].name}
+              </option>
+              <option value={JSON.stringify(date.city[5])}>
+                {date.city[5].name}
+              </option>
+              <option value={JSON.stringify(date.city[6])}>
+                {date.city[6].name}
+              </option>
+              <option value={JSON.stringify(date.city[7])}>
+                {date.city[7].name}
+              </option>
+              <option value={JSON.stringify(date.city[8])}>
+                {date.city[8].name}
+              </option>
+              <option value={JSON.stringify(date.city[9])}>
+                {date.city[9].name}
+              </option>
+            </select>
           </div>
           <label htmlFor="start_date" className={css.label}>
             <span className={css.span}>*</span> Start Date
           </label>
-          <div className={css.modalWrapper}>
-            <input
+          <div className={css.modalInput}>
+            <DatePicker
               type="text"
               required
-              value={formData.real_name}
-              onChange={onInputChange}
-              className={css.modalInput}
+              selected={formData.start_date}
+              onChange={onStartDateInputCange}
+              className={css.dataPicker}
               name="start_date"
               id="start_date"
-            ></input>
+              dateFormat="yyyy-MM-dd"
+            ></DatePicker>
           </div>
           <label htmlFor="end_date" className={css.label}>
             <span className={css.span}>*</span> End Date
           </label>
-          <div className={css.modalWrapper}>
-            <input
+          <div className={css.modalInput}>
+            <DatePicker
               required
-              value={formData.catch_phrase}
-              onChange={onInputChange}
+              selected={formData.end_date}
+              onChange={onEndDateInputCange}
               type="text"
-              className={css.modalInput}
-              name="start_date"
-              id="start_date"
-            ></input>
+              className={css.dataPicker}
+              name="end_date"
+              id="end_date"
+              dateFormat="yyyy-MM-dd"
+            ></DatePicker>
           </div>
         </div>
         <div className={css.buttonWraper}>
