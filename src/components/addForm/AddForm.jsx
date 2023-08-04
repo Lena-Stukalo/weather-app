@@ -50,7 +50,11 @@ const AddForm = ({ closeModal, setTrip }) => {
       end_date: date,
     }));
   };
-
+  function addDays(date, days) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
   return (
     <>
       <h2 className={css.title}>Create Trip</h2>
@@ -113,6 +117,8 @@ const AddForm = ({ closeModal, setTrip }) => {
               name="start_date"
               id="start_date"
               dateFormat="yyyy-MM-dd"
+              minDate={new Date()}
+              maxDate={addDays(new Date(), 15)}
             ></DatePicker>
           </div>
           <label htmlFor="end_date" className={css.label}>
@@ -128,6 +134,8 @@ const AddForm = ({ closeModal, setTrip }) => {
               name="end_date"
               id="end_date"
               dateFormat="yyyy-MM-dd"
+              minDate={new Date()}
+              maxDate={addDays(new Date(), 15)}
             ></DatePicker>
           </div>
         </div>
