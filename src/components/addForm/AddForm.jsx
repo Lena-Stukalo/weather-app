@@ -5,7 +5,7 @@ import date from "../../mock/citys.json";
 import css from "./AddForm.module.css";
 import Button from "../utils/button/Button";
 
-const AddForm = ({ operation, closeModal }) => {
+const AddForm = ({ closeModal, setTrip }) => {
   const [formData, setFormData] = useState({
     city: { name: "", src: "" },
     start_date: "",
@@ -21,17 +21,22 @@ const AddForm = ({ operation, closeModal }) => {
   };
   const onSubmitForm = (event) => {
     event.preventDefault();
-    operation(new FormData(event.target));
+    setTrip((prev) => [
+      ...prev,
+      {
+        city: formData.city,
+        start_date: formatDate(formData.start_date),
+        end_date: formatDate(formData.end_date),
+      },
+    ]);
     closeModal();
   };
   const onInputChange = (event) => {
     const { name } = event.target;
-    console.log(event.target.value);
     setFormData((prevState) => ({
       ...prevState,
       [name]: JSON.parse(event.target.value),
     }));
-    console.log(formData);
   };
   const onStartDateInputCange = (date) => {
     setFormData((prevState) => ({
@@ -40,7 +45,6 @@ const AddForm = ({ operation, closeModal }) => {
     }));
   };
   const onEndDateInputCange = (date) => {
-    console.log(formData);
     setFormData((prevState) => ({
       ...prevState,
       end_date: date,

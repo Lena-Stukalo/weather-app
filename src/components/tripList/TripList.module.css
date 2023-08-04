@@ -35,3 +35,8 @@ display: block;
 .svg{
 display: block;
 }
+.card{
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}

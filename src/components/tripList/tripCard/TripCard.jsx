@@ -5,7 +5,7 @@ function TripCard({ name, start, end, img }) {
       <img src={img} alt="city" className={css.img} />
       <h3>{name}</h3>
       <p>
-        {start}-{end}
+        {start} - {end}
       </p>
     </div>
   );

@@ -1,18 +1,27 @@
 import css from "./TripList.module.css";
 import TripCard from "./tripCard/TripCard";
 
-function TripList({ trips, toggleModal }) {
+function TripList({ trips, toggleModal, onClick }) {
+  const hendleButtonClick = (trip) => {
+    onClick(trip);
+  };
   return (
     <ul className={css.list}>
       {trips.map((trip) => {
         return (
-          <li className={css.item} key={trip.src}>
-            <TripCard
-              start={trip.start}
-              end={trip.end}
-              name={trip.name}
-              img={trip.src}
-            />
+          <li className={css.item} key={trip.city.src}>
+            <button
+              className={css.card}
+              onClick={() => hendleButtonClick(trip)}
+              value={trip}
+            >
+              <TripCard
+                start={trip.start_date}
+                end={trip.end_date}
+                name={trip.city.name}
+                img={trip.city.src}
+              />
+            </button>
           </li>
         );
       })}

@@ -7,75 +7,52 @@ import Modal from "../modal/Modal";
 import AddForm from "../addForm/AddForm";
 import { useState } from "react";
 
-function LayOut() {
+function LayOut({ data, trips, setTrips, setTrip }) {
   const [showModal, setShowModal] = useState(false);
+  const [filter, setFilter] = useState("");
   const toggleModal = () => {
     setShowModal((prev) => !prev);
   };
+  const onClick = (trip) => {
+    setTrip(trip);
+  };
+  const onFilterChange = (event) => {
+    setFilter(event.target.value);
+  };
+  const calculateTrips = () => {
+    const normalizeFilter = filter.toLowerCase();
+    if (trips) {
+      return trips.filter((trip) =>
+        trip.city.name.toLowerCase().includes(normalizeFilter)
+      );
+    }
+  };
 
-  const trips = [
-    {
-      name: "London",
-      start: "14.02.23",
-      end: "18.02.23",
-      src: "https://files.fm/thumb_show.php?i=q7gcgkdbr",
-    },
-    {
-      name: "Kyiv",
-      start: "14.02.23",
-      end: "18.02.23",
-      src: "https://files.fm/thumb_show.php?i=tx2hzmyz5",
-    },
-    {
-      name: "Kyiv",
-      start: "14.02.23",
-      end: "18.02.23",
-      src: "https://files.fm/thumb_show.php?i=2zs72rszq",
-    },
-  ];
-  const weather = [
-    {
-      datetime: "2023-08-02",
-      tempmax: 83.0,
-      tempmin: 63.2,
-      temp: 72.2,
-      icon: "rain",
-    },
-    {
-      datetime: "2023-08-03",
-      tempmax: 82.8,
-      tempmin: 64.1,
-      temp: 72.8,
-      icon: "rain",
-    },
-    {
-      datetime: "2023-08-04",
-      tempmax: 91.5,
-      tempmin: 67.2,
-      temp: 79.4,
-      icon: "clear-day",
-    },
-    {
-      datetime: "2023-08-05",
-      tempmax: 92.9,
-      tempmin: 71.7,
-      temp: 82.2,
-      icon: "clear-day",
-    },
-  ];
-  return (
-    <div className={css.container}>
-      <Title />
-      <Searchbar />
-      <TripList trips={trips} toggleModal={toggleModal} />
-      <WeatherList week={weather} />
-      {showModal && (
-        <Modal toggleModal={toggleModal}>
-          <AddForm />
-        </Modal>
-      )}
-    </div>
-  );
+  let visibleTripds = [];
+
+  if (trips) {
+    visibleTripds = calculateTrips();
+  }
+
+  if (data) {
+    return (
+      <div className={css.container}>
+        <Title />
+        <Searchbar filter={filter} onFilterChange={onFilterChange} />
+        <TripList
+          trips={visibleTripds}
+          toggleModal={toggleModal}
+          onClick={onClick}
+        />
+        <WeatherList week={data.days} />
+        {showModal && (
+          <Modal toggleModal={toggleModal}>
+            <AddForm setTrip={setTrips} closeModal={toggleModal} />
+          </Modal>
+        )}
+      </div>
+    );
+  }
 }
 
 export default LayOut;
