@@ -3,7 +3,6 @@ import LayOut from "./components/layOut/LayOut";
 import css from "./App.module.css";
 import { useState } from "react";
 import { useGetWeatherQuery } from "./redux/weather";
-import { useGetTodayWeatherQuery } from "./redux/trip";
 
 function App() {
   const [trips, setTrips] = useState([
@@ -17,7 +16,7 @@ function App() {
     },
   ]);
   const [trip, setTrip] = useState(trips[0]);
-  const { data, isFetching } = useGetWeatherQuery({ ...trip });
+  const { data } = useGetWeatherQuery({ ...trip });
   if (data) {
     return (
       <div className={css.App}>

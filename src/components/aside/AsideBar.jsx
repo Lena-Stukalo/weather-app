@@ -3,13 +3,9 @@ import TimeList from "../weatherToday/timeList/TimeList";
 import css from "./AsideBar.module.css";
 import { useGetTodayWeatherQuery } from "../../redux/trip";
 function AsideBar({ trip }) {
-  const { data: today, isFetching } = useGetTodayWeatherQuery({
+  const { data: today } = useGetTodayWeatherQuery({
     city: trip.city,
   });
-  //const [date, setDate] = useState(new Date());
-  const date = Date.parse(trip.start_date) - new Date();
-  console.log(date);
-  // const date = new Date();
   if (today) {
     return (
       <div className={css.container}>
