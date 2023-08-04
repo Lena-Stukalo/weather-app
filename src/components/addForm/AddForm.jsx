@@ -21,14 +21,18 @@ const AddForm = ({ closeModal, setTrip }) => {
   };
   const onSubmitForm = (event) => {
     event.preventDefault();
-    setTrip((prev) => [
-      ...prev,
-      {
-        city: formData.city,
-        start_date: formatDate(formData.start_date),
-        end_date: formatDate(formData.end_date),
-      },
-    ]);
+    setTrip((prev) => {
+      const result = [
+        ...prev,
+        {
+          city: formData.city,
+          start_date: formatDate(formData.start_date),
+          end_date: formatDate(formData.end_date),
+        },
+      ];
+      localStorage.setItem("trips", JSON.stringify(result));
+      return result;
+    });
     closeModal();
   };
   const onInputChange = (event) => {

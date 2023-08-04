@@ -7,11 +7,17 @@ function TimeList({ date }) {
   const [seconds, setSeconds] = useState(0);
   const getTime = () => {
     const time = Date.parse(date) - Date.now();
-
-    setDays(Math.floor(time / (1000 * 60 * 60 * 24)));
-    setHours(Math.floor((time / (1000 * 60 * 60)) % 24));
-    setMinutes(Math.floor((time / 1000 / 60) % 60));
-    setSeconds(Math.floor((time / 1000) % 60));
+    if (0 >= Number(time)) {
+      setDays(0);
+      setHours(0);
+      setMinutes(0);
+      setSeconds(0);
+    } else {
+      setDays(Math.floor(time / (1000 * 60 * 60 * 24)));
+      setHours(Math.floor((time / (1000 * 60 * 60)) % 24));
+      setMinutes(Math.floor((time / 1000 / 60) % 60));
+      setSeconds(Math.floor((time / 1000) % 60));
+    }
   };
   useEffect(() => {
     const interval = setInterval(() => getTime(date), 1000);

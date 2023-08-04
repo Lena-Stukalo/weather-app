@@ -1,7 +1,7 @@
 import AsideBar from "./components/aside/AsideBar";
 import LayOut from "./components/layOut/LayOut";
 import css from "./App.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetWeatherQuery } from "./redux/weather";
 
 function App() {
@@ -15,6 +15,9 @@ function App() {
       end_date: "2023-08-07",
     },
   ]);
+  useEffect(() => {
+    setTrips(JSON.parse(localStorage.getItem("trips")));
+  }, []);
   const [trip, setTrip] = useState(trips[0]);
   const { data } = useGetWeatherQuery({ ...trip });
   if (data) {
