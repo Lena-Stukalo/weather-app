@@ -16,7 +16,10 @@ function App() {
     },
   ]);
   useEffect(() => {
-    setTrips(JSON.parse(localStorage.getItem("trips")));
+    const trips = JSON.parse(localStorage.getItem("trips"));
+    if (trips) {
+      setTrips(trips);
+    }
   }, []);
   const [trip, setTrip] = useState(trips[0]);
   const { data } = useGetWeatherQuery({ ...trip });
