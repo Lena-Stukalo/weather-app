@@ -76,36 +76,11 @@ const AddForm = ({ closeModal, setTrip }) => {
               required
               onChange={onInputChange}
             >
-              <option value={JSON.stringify(date.city[0])}>
-                {date.city[0].name}
-              </option>
-              <option value={JSON.stringify(date.city[1])}>
-                {date.city[1].name}
-              </option>
-              <option value={JSON.stringify(date.city[2])}>
-                {date.city[2].name}
-              </option>
-              <option value={JSON.stringify(date.city[3])}>
-                {date.city[3].name}
-              </option>
-              <option value={JSON.stringify(date.city[4])}>
-                {date.city[4].name}
-              </option>
-              <option value={JSON.stringify(date.city[5])}>
-                {date.city[5].name}
-              </option>
-              <option value={JSON.stringify(date.city[6])}>
-                {date.city[6].name}
-              </option>
-              <option value={JSON.stringify(date.city[7])}>
-                {date.city[7].name}
-              </option>
-              <option value={JSON.stringify(date.city[8])}>
-                {date.city[8].name}
-              </option>
-              <option value={JSON.stringify(date.city[9])}>
-                {date.city[9].name}
-              </option>
+              {date.city.map((city) => (
+                <option value={JSON.stringify(city)} key={city.name}>
+                  {city.name}
+                </option>
+              ))}
             </select>
           </div>
           <label htmlFor="start_date" className={css.label}>
