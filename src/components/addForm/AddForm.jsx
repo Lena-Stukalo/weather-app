@@ -86,7 +86,7 @@ const AddForm = ({ closeModal, setTrip }) => {
           <label htmlFor="start_date" className={css.label}>
             <span className={css.span}>*</span> Start Date
           </label>
-          <div className={css.modalInput}>
+          <div className={css.modalInputDate}>
             <DatePicker
               type="text"
               required
@@ -103,7 +103,7 @@ const AddForm = ({ closeModal, setTrip }) => {
           <label htmlFor="end_date" className={css.label}>
             <span className={css.span}>*</span> End Date
           </label>
-          <div className={css.modalInput}>
+          <div className={css.modalInputDate}>
             <DatePicker
               required
               selected={formData.end_date}
